@@ -5,15 +5,7 @@ Please keep the total length to about 10 slides.
 
 ---
 
-## Slide 1 – Title
-
-- Your name
-- “Lexical Simplification Task – iDem”
-- Date
-
----
-
-## Slide 2 – Data understanding
+## – Data understanding
 
 - Brief description of the EN/FR datasets
 - Example sentence(s)
@@ -21,16 +13,15 @@ Please keep the total length to about 10 slides.
 
 ---
 
-## Slide 3 – Task 0: overview
+## – Task 0: overview
 
 - Key statistics (counts, label distribution, length)
 - One or two short comments (e.g. label imbalance, surprises)
 
 ---
 
-## Slide 4–5 – Task 1: estimating simplified proportion
+## – Task 1: estimating simplified proportion
 
-- Naïve estimate (from labels)
 - Your improved method:
   - key idea (1–2 bullet points)
   - main assumptions
@@ -38,7 +29,7 @@ Please keep the total length to about 10 slides.
 
 ---
 
-## Slide 6–7 – Task 2: parallel corpus
+## – Task 2: parallel corpus
 
 - Alignment strategy (diagram or bullets)
 - Filters applied
@@ -47,7 +38,7 @@ Please keep the total length to about 10 slides.
 
 ---
 
-## Slide 8–9 – Task 3: chosen analysis
+## – Task 3: chosen analysis
 
 - Short description of the experiment (classifier, scores, or patterns)
 - Main results (metric, plots, or examples)
@@ -55,10 +46,10 @@ Please keep the total length to about 10 slides.
 
 ---
 
-## Slide 10 – Takeaways & future work
+## Takeaways & future work
 
 - What you learned about the data
 - Main limitations of your approach
 - What you would try next with more time
 
-Save your slides as `reports/main_presentation.pdf`.
+
