@@ -16,6 +16,29 @@ We are interested in **how** you work:
 There is no single “correct” answer.
 
 ---
+# Project Structure
+
+```text
+idem-ls-candidate-task/
+├─ README.md                  # ← You are here
+├─ requirements.txt
+├─ data/
+│  ├─ README.md               # instructions for downloading data
+│  ├─ En-Dataset.csv          # (candidate downloads)
+│  ├─ Fr-Dataset.csv
+│  └─ processed/              # you create this directory for outputs
+├─ src/
+│  ├─ 01_data_overview.py
+│  ├─ 02_estimate_simplified_proportion.py
+│  ├─ 03_build_parallel_corpus.py
+│  └─ 04_free_analysis.py
+├─ notebooks/
+│  └─ exploration.ipynb       # starter notebook (provided)
+└─ reports/
+   └─ presentation_outline.md # guidance for 10-slide presentation
+```
+
+---
 
 ## 1. Data
 
@@ -66,111 +89,6 @@ Create a short overview of the datasets for each language:
    - Do you see obvious label noise or artefacts?
 
 You can implement this in `src/01_data_overview.py` or a notebook.
-
----
-Here is the **complete, polished, production-ready README.md** for your entire GitHub repo.
-
-It incorporates:
-
-✔ the full task description
-✔ the Vikidea → Wikipedia “promotion” requirement
-✔ instructions for data download (via Release)
-✔ repo structure
-✔ deliverables
-✔ expectations
-✔ clean formatting
-
-You can **copy/paste** this directly into `README.md` on GitHub.
-
----
-
-# 📘 iDem Research Assistant Task
-
-## Lexical Simplification Analysis (English & French)
-
-Welcome!
-This repository contains the technical task for candidates applying to the **iDem Research Assistant position**, focusing on **lexical simplification**, **multilingual text processing**, and **methodological reasoning**.
-
-Your goal is to explore noisy English/French corpora derived from **Wikipedia** and **Vikidia/Vikidea**, estimate simplification properties, build a small parallel corpus, and carry out a short focused analysis.
-
-The purpose of this task is to understand **how you think**, not just whether you get “correct” numbers.
-
----
-
-# 📁 Project Structure
-
-```text
-idem-ls-candidate-task/
-├─ README.md                  # ← You are here
-├─ requirements.txt
-├─ data/
-│  ├─ README.md               # instructions for downloading data
-│  ├─ En-Dataset.csv          # (candidate downloads)
-│  ├─ Fr-Dataset.csv
-│  └─ processed/              # you create this directory for outputs
-├─ src/
-│  ├─ 01_data_overview.py
-│  ├─ 02_estimate_simplified_proportion.py
-│  ├─ 03_build_parallel_corpus.py
-│  └─ 04_free_analysis.py
-├─ notebooks/
-│  └─ exploration.ipynb       # starter notebook (provided)
-└─ reports/
-   └─ presentation_outline.md # guidance for 10-slide presentation
-```
-
----
-
-# 📦 Data Download
-
-Because the datasets are large, they are provided as downloadable release assets.
-
-### 👉 Download both datasets from the latest GitHub Release:
-
-**[https://github.com/USER/REPO/releases/latest](https://github.com/USER/REPO/releases/latest)**
-
-You should download:
-
-* `En-Dataset.csv`
-* `Fr-Dataset.csv`
-
-Place them inside the `data/` folder before running any scripts or notebooks.
-
-More details about file format are in `data/README.md`.
-
----
-
-# 🧠 Your Tasks
-
-You may use either English, French, or both languages — if you choose only one, please briefly explain why.
-
----
-
-## **Task 0 — Data Overview**
-
-Start by familiarising yourself with the datasets.
-
-Please:
-
-1. Load the English and French CSV files.
-2. Report basic statistics:
-
-   * number of sentences
-   * distribution of `Label`
-   * average & median sentence length (`LengthWords`, `LengthChars`)
-3. Inspect a small sample of sentences and comment briefly on:
-
-   * differences between complex vs simplified sentences
-   * potential label noise
-   * any unusual artefacts or patterns
-
-You may implement this in:
-
-```
-src/01_data_overview.py
-```
-
-or in a notebook.
 
 ---
 
