@@ -68,79 +68,198 @@ Create a short overview of the datasets for each language:
 You can implement this in `src/01_data_overview.py` or a notebook.
 
 ---
+Here is the **complete, polished, production-ready README.md** for your entire GitHub repo.
 
-### Task 1 – Estimate the *true* proportion of simplified sentences
+It incorporates:
 
-The `Label` column gives an *imperfect* annotation of whether a sentence is
-simplified (`Label = 1`) or complex (`Label = 0`).
+✔ the full task description
+✔ the Vikidea → Wikipedia “promotion” requirement
+✔ instructions for data download (via Release)
+✔ repo structure
+✔ deliverables
+✔ expectations
+✔ clean formatting
 
-We suspect that:
-
-- some sentences labeled as **complex** are actually quite simple  
-- some labeled as **simplified** are still quite complex
-
-Your goal is to propose and justify an estimate of the **true proportion of
-simplified sentences** in each dataset (EN/FR).
-
-Please:
-
-1. Start by computing the **naïve proportion**:  
-   \#(Label = 1) / total.
-2. Then design a method to obtain a **better estimate**, for example:
-   - simple heuristic rules based on length or vocabulary
-   - or a classifier trained on a subset that you consider “clean”
-   - or another approach you can justify
-3. Use your method to produce:
-   - an adjusted estimate of the proportion of simplified sentences
-   - for English and/or French
-4. Explain:
-   - what assumptions you made
-   - what you think are the main sources of error
-   - why your estimate might be more realistic than the naïve one
-
-You can put your code in `src/02_estimate_simplified_proportion.py`.
-
-We will compare your estimates against internal reference values, but we care
-much more about **your methodology** than about matching our numbers.
+You can **copy/paste** this directly into `README.md` on GitHub.
 
 ---
 
-### Task 2 – Build a small parallel (complex–simplified) corpus
+# 📘 iDem Research Assistant Task
 
-Using the datasets, construct a small **sentence-level parallel corpus** of
-likely `(complex_sentence, simplified_sentence)` pairs.
+## Lexical Simplification Analysis (English & French)
 
-Hints / constraints:
+Welcome!
+This repository contains the technical task for candidates applying to the **iDem Research Assistant position**, focusing on **lexical simplification**, **multilingual text processing**, and **methodological reasoning**.
 
-- Sentences come from the same article (`ID`, `Name`).
-- Articles may contain both complex and simplified sentences.
-- There is no gold alignment at the sentence level; you must infer it.
+Your goal is to explore noisy English/French corpora derived from **Wikipedia** and **Vikidia/Vikidea**, estimate simplification properties, build a small parallel corpus, and carry out a short focused analysis.
+
+The purpose of this task is to understand **how you think**, not just whether you get “correct” numbers.
+
+---
+
+# 📁 Project Structure
+
+```text
+idem-ls-candidate-task/
+├─ README.md                  # ← You are here
+├─ requirements.txt
+├─ data/
+│  ├─ README.md               # instructions for downloading data
+│  ├─ En-Dataset.csv          # (candidate downloads)
+│  ├─ Fr-Dataset.csv
+│  └─ processed/              # you create this directory for outputs
+├─ src/
+│  ├─ 01_data_overview.py
+│  ├─ 02_estimate_simplified_proportion.py
+│  ├─ 03_build_parallel_corpus.py
+│  └─ 04_free_analysis.py
+├─ notebooks/
+│  └─ exploration.ipynb       # starter notebook (provided)
+└─ reports/
+   └─ presentation_outline.md # guidance for 10-slide presentation
+```
+
+---
+
+# 📦 Data Download
+
+Because the datasets are large, they are provided as downloadable release assets.
+
+### 👉 Download both datasets from the latest GitHub Release:
+
+**[https://github.com/USER/REPO/releases/latest](https://github.com/USER/REPO/releases/latest)**
+
+You should download:
+
+* `En-Dataset.csv`
+* `Fr-Dataset.csv`
+
+Place them inside the `data/` folder before running any scripts or notebooks.
+
+More details about file format are in `data/README.md`.
+
+---
+
+# 🧠 Your Tasks
+
+You may use either English, French, or both languages — if you choose only one, please briefly explain why.
+
+---
+
+## **Task 0 — Data Overview**
+
+Start by familiarising yourself with the datasets.
 
 Please:
 
-1. Define a strategy for aligning sentences within each article, for example:
-   - match each simplified sentence (`Label = 1`) to the closest complex
-     sentence (`Label = 0`) in the same article according to some similarity
-     measure (e.g. token overlap, cosine similarity in an embedding space, etc.)
-2. Implement this pipeline for **French** (required) and optionally for English.
-3. Apply quality filters (your choice), e.g.:
-   - discard pairs with too low similarity
-   - discard very short sentences
-   - remove obvious duplicates
-4. Save the final parallel corpus as e.g.:
+1. Load the English and French CSV files.
+2. Report basic statistics:
 
-   - `data/processed/fr_parallel.tsv`  
-   - (optionally) `data/processed/en_parallel.tsv`
+   * number of sentences
+   * distribution of `Label`
+   * average & median sentence length (`LengthWords`, `LengthChars`)
+3. Inspect a small sample of sentences and comment briefly on:
 
-   with at least columns:
-   - `article_id`, `article_name`, `complex`, `simple`, `similarity_score`
+   * differences between complex vs simplified sentences
+   * potential label noise
+   * any unusual artefacts or patterns
 
-5. Report:
-   - how many pairs your method produced
-   - what filters you used
-   - your impression of quality (supported by a few examples)
+You may implement this in:
 
-Place code in `src/03_build_parallel_corpus.py` or a notebook.
+```
+src/01_data_overview.py
+```
+
+or in a notebook.
+
+---
+
+## **Task 1 — Estimate the *true* proportion of simplified sentences**
+
+(including simplified Vikidea-style sentences inside Wikipedia)
+
+The `Label` column indicates whether a sentence is **simplified** (`Label = 1`)
+or **complex** (`Label = 0`). However, labels are **noisy**.
+
+In particular:
+
+* some “complex” sentences are actually simple
+* some “simplified” sentences are still complex
+* **some simplified Vikidea/Vikidia sentences appear inside the Wikipedia dataset**
+  (we call this *leakage*)
+
+Your goal is to estimate the **true proportion of simplified sentences** in each dataset,
+including the proportion of simplified exact or Vikidea-style sentences that appear in Wikipedia.
+
+### Please:
+
+1. **Compute the naïve estimate**:
+
+   ```
+   #(Label = 1) / total
+   ```
+
+2. **Design a better estimation method**, using any reasonable approach. 
+
+   * similarity between "complex" Wikipedia sentences and simplified Vikidea sentences
+   * a simple classifier trained on clean subsets
+   * your own method
+
+3. **Produce final estimates**:
+
+   * adjusted true proportion of simplified sentences (EN/FR)
+   * estimated proportion of Vikidea-like simplified sentences inside Wikipedia
+     (e.g. % of complex-labelled sentences that resemble simplified sentences)
+
+4. **Explain your reasoning**:
+
+   * how you operationalised “simplified”
+   * how you detected Vikidea-style sentences
+   * key assumptions & limitations
+   * why your adjusted estimate is more realistic than the naïve one
+
+Implement in:
+
+```
+src/02_estimate_simplified_proportion.py
+```
+
+---
+
+## **Task 2 — Build a parallel (complex → simplified) corpus**
+
+Construct a small, cleaned set of `(complex_sentence, simplified_sentence)` pairs.
+
+### Requirements:
+
+1. **French is required.**
+   English is optional but welcome.
+
+2. Define an alignment method, for example:
+
+   * aligning Vikidea simplified sentences with Wikipedia complex ones via similarity
+
+3. Save your final corpus as:
+
+```
+data/processed/fr_parallel.tsv
+data/processed/en_parallel.tsv   
+```
+
+with columns like:
+
+| article_id | article_name | complex | simple | similarity_score |
+
+4. Report:
+   * how many pairs your method produced
+   * what filters you used
+   * your impression of quality (supported by a few examples)
+
+Implement in:
+
+```
+src/03_build_parallel_corpus.py
+```
 
 ---
 
@@ -158,58 +277,70 @@ Choose **one** of the following (or propose your own small idea):
 
 2. **Complexity scoring**
 
-   - Define a numeric “complexity” score per sentence (e.g. based on length,
-     lexical frequency, syntactic depth, LM perplexity, etc.).
+   - Define a numeric “complexity” score per sentence.
    - Compare score distributions for Label 0 vs Label 1.
    - Discuss whether the scores match your intuition about complexity.
 
 3. **Lexical simplification patterns**
 
-   - Using your parallel corpus from Task 2, extract common word-level
-     substitutions (complex → simple).
+   - Using your parallel corpus from Task 2, extract common **word-level substitutions** (complex → simple).
    - Provide some statistics and examples:
-     - most frequent substitutions
-     - types of words that tend to be simplified
+   - most frequent substitutions
+   - types of words that tend to be simplified
 
 Put code for this in `src/04_free_analysis.py` or a notebook.
 
 ---
 
-## 3. Deliverables
+# Deliverables
 
 Please include:
 
-1. **Code / notebooks**
+### **1. Code & notebooks**
 
    - Place Python scripts in `src/` and any notebooks in `notebooks/`.
    - Code should be reasonably organised and runnable.
+  
+### **2. A presentation (PDF)**
 
-2. **Short slide presentation (preferred over a long report)**
-
-   - Prepare a slide deck (up to **10 slides**), summarising:
+  - Prepare a slide deck (up to **10 slides**), summarising:
      - problem understanding
      - methods
      - key results
      - main takeaways & limitations
    - Export slides as **PDF** and put in `reports/` (e.g. `reports/main_presentation.pdf`).
 
-   A suggested slide outline is provided in `reports/presentation_outline.md`.
+A slide outline template is provided in:
 
-3. **Environment**
+```
+reports/presentation_outline.md
+```
+### 3. **Environment**
 
    - Include a `requirements.txt` (or `environment.yml`) listing your main
      dependencies.
+     
+---
+
+
+# Evaluation Criteria
+
+We are primarily evaluating:
+
+* **Methodological clarity**
+* **Ability to handle noisy data**
+* **Justification of design choices**
+* **Clean and reproducible code**
+* **Interpretation of results**
+* **Concise communication**
+
+This is *not* about matching exact numbers — it's about showing how you think.
 
 ---
 
-## 4. Practical Notes
-
-- You may use any standard Python / NLP libraries (NumPy, pandas, scikit-learn,
-  spaCy, Hugging Face, etc.).
-- Please keep computation reasonable for a typical laptop.
-- We will look at:
-  - how you deal with label noise and ambiguity
-  - how you motivate design choices
-  - whether the project is easy to run and understand
 
 Thank you for your time — we look forward to your submission.
+
+
+
+
