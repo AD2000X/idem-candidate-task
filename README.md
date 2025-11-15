@@ -30,8 +30,7 @@ idem-candidate-task/
 ├─ src/
 │  ├─ 01_data_overview.py
 │  ├─ 02_estimate_simplified_proportion.py
-│  ├─ 03_build_parallel_corpus.py
-│  └─ 04_free_analysis.py
+│  └─ 03_free_analysis.py
 ├─ notebooks/
 │  └─ exploration.ipynb       # starter notebook (provided)
 └─ reports/
@@ -58,8 +57,8 @@ Each has the following columns:
 - `ID` – document / article identifier
 - `Name` – article title
 - `Sentence` – a single sentence in that article (EN or FR)
-- `Label` – binary label (1 = sentence annotated as **simplified**,  
-  0 = sentence annotated as **complex**).  
+- `Label` – binary label (0 = sentence annotated as **simple**,  
+  1 = sentence annotated as **complex**).  
 - `LengthWords` – sentence length in tokens
 - `LengthChars` – sentence length in characters
 
@@ -72,9 +71,6 @@ More detail is in `data/README.md`.
 Please work through the tasks below. Focus on **clarity of reasoning** and
 **reproducibility**.
 
-You may use either English, French, or both. When you choose only one language,
-please say why.
-
 ### Task 0 – Quick data overview
 
 Create a short overview of the datasets for each language:
@@ -82,32 +78,32 @@ Create a short overview of the datasets for each language:
 1. Basic statistics:
    - number of sentences
    - distribution of `Label` (how many 0 / 1)
-   - IQR range.
+   - IQR range of sentence lengths.
 2. Inspect a small sample of sentences and comment briefly:
    - How would *you* describe the difference between “complex” and
-     “simplified” sentences here?
+     “simple” sentences here?
    - Do you see obvious label noise or artefacts?
 
 You can implement this in `src/01_data_overview.py` or a notebook.
 
 ---
 
-## **Task 1 — Estimate the *true* proportion of simplified sentences**
+## **Task 1 — Estimate the *true* proportion of simple sentences**
 
-(including simplified Vikidea-style sentences inside Wikipedia)
+(including simple Vikidia-style sentences inside Wikipedia)
 
-The `Label` column indicates whether a sentence is **simplified** (`Label = 1`)
+The `Label` column indicates whether a sentence is **simple** (`Label = 1`)
 or **complex** (`Label = 0`). However, labels are **noisy**.
 
 In particular:
 
 * some “complex” sentences are actually simple
-* some “simplified” sentences are still complex
-* **some simplified Vikidea/Vikidia sentences appear inside the Wikipedia dataset**
+* some “simple” sentences are still complex
+* **some Wikipedia sentences appear inside the Vikidia dataset**
   (we call this *leakage*)
 
-Your goal is to estimate the **true proportion of simplified sentences** in each dataset,
-including the proportion of simplified exact or Vikidea-style sentences that appear in Wikipedia.
+Your goal is to estimate the **true proportion of simple sentences** in each dataset,
+including the proportion of simple exact or Vikidia-style sentences that appear in Wikipedia.
 
 1. **Compute the naïve estimate**:
 
@@ -117,20 +113,20 @@ including the proportion of simplified exact or Vikidea-style sentences that app
 
 2. **Design a better estimation method**, using any reasonable approach. 
 
-   * similarity between "complex" Wikipedia sentences and simplified Vikidea sentences
+   * similarity between "complex" Wikipedia sentences and simple Vikidia sentences
    * a simple classifier trained on clean subsets
    * your own method
 
 3. **Produce final estimates**:
 
-   * adjusted true proportion of simplified sentences (EN/FR)
-   * estimated proportion of Vikidea-like simplified sentences inside Wikipedia
-     (e.g. % of complex-labelled sentences that resemble simplified sentences)
+   * adjusted true proportion of simple sentences (in both EN and FR)
+   * estimated proportion of Vikidia-like simple sentences inside Wikipedia
+     (e.g. % of complex-labelled sentences that resemble simple sentences)
 
 4. **Explain your reasoning**:
 
-   * how you operationalised “simplified”
-   * how you detected Vikidea-style sentences
+   * how you operationalised “simple”
+   * how you detected Vikidia-style sentences
    * key assumptions & limitations
    * why your adjusted estimate is more realistic than the naïve one
 
@@ -142,48 +138,11 @@ src/02_estimate_simplified_proportion.py
 
 ---
 
-## **Task 2 — Build a parallel (complex → simplified) corpus**
-
-Construct a small, cleaned set of `(complex_sentence, simplified_sentence)` pairs.
-
-### Requirements:
-
-1. **French is required.**
-   English is optional but welcome.
-
-2. Define an alignment method, for example:
-
-   * aligning Vikidea simplified sentences with Wikipedia complex ones via similarity
-
-3. Save your final corpus as:
-
-```
-data/processed/fr_parallel.tsv
-data/processed/en_parallel.tsv   
-```
-
-with columns like:
-
-| article_id | article_name | complex | simple | similarity_score |
-
-4. Report:
-   * how many pairs your method produced
-   * what filters you used
-   * your impression of quality (supported by a few examples)
-
-Implement in:
-
-```
-src/03_build_parallel_corpus.py
-```
-
----
-
-### Task 3 – Do something interesting with the corpora (optional)
+### Task 2 – Do something interesting with the corpora (optional)
 
 Choose **one** of the following (or propose your own small idea):
 
-1. **Complex vs simplified classifier**
+1. **Complex vs simple classifier**
 
    - Train a simple model (e.g. logistic regression, small transformer, etc.)
      to predict the `Label` from `Sentence` (EN or FR).
@@ -204,7 +163,7 @@ Choose **one** of the following (or propose your own small idea):
    - most frequent substitutions
    - types of words that tend to be simplified
 
-Put code for this in `src/04_free_analysis.py` or a notebook.
+Put code for this in `src/03_free_analysis.py` or a notebook.
 
 ---
 
@@ -219,7 +178,7 @@ Please include:
   
 ### **2. A presentation (PDF)**
 
-  - Prepare a slide deck (up to **10 slides**), summarising:
+  - Prepare a slide deck (up to **7 slides**), summarising:
      - problem understanding
      - methods
      - key results
