@@ -8,10 +8,10 @@ You are given **two CSV datasets**, one for English and one for French, built
 from wikipedia and vikidea texts with sentence-level annotations for
 complexity classification.
 
-We are interested in **how** you work:
+We are interested in:
 - how you understand data  
 - how you design and justify simple experiments  
-- how clearly you explain your methods and findings  
+- how you explain your methods and findings  
 
 There is no single “correct” answer.
 
@@ -214,7 +214,7 @@ This is *not* about matching exact numbers — it's about showing how you think.
 ---
 
 
-Thank you for your time — we look forward to your submission.
+Thank you for your time — we're looking forward to your submission.
 
 
 
