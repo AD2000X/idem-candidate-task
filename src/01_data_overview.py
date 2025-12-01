@@ -990,6 +990,8 @@ def main() -> None:
     print(f"  - {OUTPUT_DIR}/fr_duplicates.csv")
     print(f"  - {OUTPUT_DIR}/*.png (visualizations)")
 
+en_cleaned, en_dup_df, en_stats = preprocess_dataset('en')
+fr_cleaned, fr_dup_df, fr_stats = preprocess_dataset('fr')
 
 if __name__ == "__main__":
     main()
