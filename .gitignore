@@ -17,9 +17,16 @@ env/
 Thumbs.db
 
 # Data outputs
-data/processed/
 *.log
+*.csv
 
 # Reports artefacts
-reports/*.pptx
-reports/*.pdf
+*.pptx
+
+data/*.csv
+features/*
+logs/*
+results/*
+output/*
+venv/
+__pycache__/
