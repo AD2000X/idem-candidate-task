@@ -1,11 +1,34 @@
-dataset_cleaned:
-https://www.kaggle.com/datasets/ad2000x/dataset_cleaned
+# iDEM Research Task - Datasets
+
+## Datasets
+
+### dataset_cleaned
+
+**URL:** https://www.kaggle.com/datasets/ad2000x/dataset-cleaned
+
 Include data without duplication and add index for each row.
 
-extracted_features:
-https://www.kaggle.com/datasets/ad2000x/extracted_features
+### extracted_features
+
+**URL:** https://www.kaggle.com/datasets/ad2000x/extracted_features
+
 Include extracted_features from dataset_cleaned.
-# Feature Description
+
+### data_with_features
+
+**URL:** https://www.kaggle.com/datasets/ad2000x/data-features/data
+
+Include dataset_cleaned with extracted_features.
+
+### mislabel_candidates
+
+**URL:** https://www.kaggle.com/datasets/ad2000x/mislabel-candidates
+
+Include mislabel_candidates from 02_estimate_simplified_proportion.
+
+---
+
+## Feature Description
 
 | Feature | Description |
 |---------|-------------|
@@ -35,11 +58,3 @@ Include extracted_features from dataset_cleaned.
 | `clause_ratio` | Ratio of clauses to total tokens |
 | `noun_ratio` | Proportion of noun tokens |
 | `verb_ratio` | Proportion of verb tokens |
-
-data_with_features
-https://www.kaggle.com/datasets/ad2000x/data-features/data
-Include dataset_cleaned with extracted_features.
-
-mislabel_candidates:
-https://www.kaggle.com/datasets/ad2000x/mislabel-candidates
-Include mislabel_candidates from 02_estimate_simplified_proportion.
